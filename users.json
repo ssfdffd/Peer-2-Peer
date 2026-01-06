@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1766753810391,
+    "name": "Soso",
+    "surname": "Manyike",
+    "age": "13",
+    "phone": "0785449236",
+    "school": "Sino College High",
+    "email": "sino@gmail.com",
+    "userType": "tutor",
+    "password": "$2b$10$jI3hNpoZnjsEjrslCzkigOum1bh3PHl6wqdWLb9sruLsDP.VRo2By",
+    "createdAt": "2025-12-26T12:56:50.391Z"
+  }
+]
