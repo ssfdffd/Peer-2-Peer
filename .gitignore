@@ -1,0 +1,13 @@
+# Ignore the local database file
+database.sqlite
+
+# Ignore the heavy library folder
+node_modules/
+
+# Ignore environment variables
+.env
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
