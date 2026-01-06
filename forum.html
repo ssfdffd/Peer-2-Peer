@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Forum | Peer-2-Peer PRO</title>
+    <link rel="stylesheet" href="student.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .forum-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            position: relative;
+        }
+        .forum-user { font-weight: bold; color: #38bdf8; display: flex; align-items: center; gap: 8px; }
+        .forum-date { font-size: 0.75rem; color: #94a3b8; margin-bottom: 10px; }
+        .forum-text { line-height: 1.6; color: #1e293b; margin-bottom: 15px; }
+        .forum-actions { border-top: 1px solid #f1f5f9; padding-top: 15px; display: flex; gap: 20px; }
+        .action-btn { background: none; border: none; color: #64748b; cursor: pointer; font-size: 0.9rem; transition: 0.3s; }
+        .action-btn:hover { color: #38bdf8; }
+        
+        .replies-dropdown { background: #f8fafc; border-radius: 10px; padding: 15px; margin-top: 10px; border-left: 4px solid #38bdf8; }
+        .reply-item { padding: 8px 0; border-bottom: 1px solid #edf2f7; position: relative; }
+        .reply-item:last-child { border-bottom: none; }
+        .reply-input-box { display: flex; gap: 10px; margin-top: 15px; background: #f1f5f9; padding: 10px; border-radius: 10px; }
+        .black-typing { flex: 1; padding: 8px; border-radius: 5px; border: 1px solid #cbd5e1; color: #000 !important; background: #fff !important; }
+        
+        .delete-btn { position: absolute; top: 20px; right: 20px; background: none; border: none; color: #cbd5e1; cursor: pointer; }
+        .delete-btn:hover { color: #ef4444; }
+        .del-small { font-size: 0.7rem; color: #ef4444; cursor: pointer; margin-left: 10px; text-decoration: underline; }
+    </style>
+</head>
+<body class="light-mode">
+
+    <nav class="glass-nav">
+        <div class="logo-glow">P2P <span class="premium">COMMUNITY</span></div>
+        <div class="nav-right">
+            <div class="notification-hub">
+                <i class="fas fa-bell" id="bellIcon" onclick="toggleNotifs()"></i>
+                <span id="notifBadge" class="badge-red" style="display:none;">0</span>
+                <div id="notifDropdown" class="notif-box" style="display:none;"></div>
+            </div>
+            <button class="logout-minimal" onclick="location.href='student-portal.html'">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </button>
+        </div>
+    </nav>
+
+    <div class="dashboard-wrapper">
+        <aside class="side-panel">
+            <div class="ask-box-sidebar">
+                <h4><i class="fas fa-pen-nib"></i> Start a Discussion</h4>
+                <textarea id="forumQuestion" placeholder="What are you working on today?"></textarea>
+                <button class="btn-ask" onclick="submitToForum()">Post to Community</button>
+            </div>
+        </aside>
+
+        <main class="main-panel">
+            <section class="portal-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-comments"></i> Student Discussions</h3>
+                </div>
+                <div id="forumFeed">
+                    <div class="loading-state">Loading discussions...</div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadForum();
+            setInterval(checkNotifications, 20000);
+        });
+
+        async function loadForum() {
+            const schoolId = localStorage.getItem('school_id') || 'public';
+            try {
+                const res = await fetch(`/api/forum/questions?school_id=${schoolId}`);
+                const questions = await res.json();
+                renderForum(questions);
+            } catch (err) {
+                console.error("Forum load error", err);
+            }
+        }
+
+        function renderForum(questions) {
+            const feed = document.getElementById('forumFeed');
+            const currentUser = localStorage.getItem('userName');
+            feed.innerHTML = questions.length ? '' : '<p class="text-dim">No discussions yet. Be the first to ask!</p>';
+            
+            questions.forEach(q => {
+                const isOwner = q.userName === currentUser;
+                const card = document.createElement('div');
+                card.className = 'forum-card';
+                card.innerHTML = `
+                    ${isOwner ? `<button class="delete-btn" onclick="deleteQuestion(${q.id})"><i class="fas fa-trash"></i></button>` : ''}
+                    <div class="forum-user"><i class="fas fa-user-circle"></i> ${q.userName}</div>
+                    <div class="forum-date">${q.date}</div>
+                    <div class="forum-text">${q.text}</div>
+                    
+                    <div class="forum-actions">
+                        <button class="action-btn" onclick="toggleReplies(${q.id})">
+                            <i class="fas fa-chevron-down"></i> View Answers
+                        </button>
+                        <button class="action-btn" onclick="toggleHelpInput(${q.id})">
+                            <i class="fas fa-hands-helping"></i> Help Peer
+                        </button>
+                    </div>
+
+                    <div id="help-input-${q.id}" class="reply-input-box" style="display:none;">
+                        <input type="text" id="input-text-${q.id}" placeholder="Write your answer..." class="black-typing">
+                        <button class="btn-ask" onclick="submitReply(${q.id})">Send</button>
+                    </div>
+
+                    <div id="replies-list-${q.id}" class="replies-dropdown" style="display:none;">
+                        <div class="loading-small">Loading answers...</div>
+                    </div>
+                `;
+                feed.appendChild(card);
+            });
+        }
+
+        async function submitToForum() {
+            const text = document.getElementById('forumQuestion').value;
+            const userName = localStorage.getItem('userName');
+            const school_id = localStorage.getItem('school_id') || 'public';
+
+            if (!text.trim()) return alert("Write something first!");
+
+            const res = await fetch('/api/forum/post', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userName, text, date: new Date().toLocaleString(), school_id })
+            });
+
+            if (res.ok) {
+                document.getElementById('forumQuestion').value = '';
+                loadForum();
+            }
+        }
+
+        function toggleHelpInput(id) {
+            const el = document.getElementById(`help-input-${id}`);
+            el.style.display = el.style.display === 'none' ? 'flex' : 'none';
+        }
+
+        async function toggleReplies(id) {
+            const list = document.getElementById(`replies-list-${id}`);
+            const currentUser = localStorage.getItem('userName');
+            
+            if (list.style.display === 'none') {
+                list.style.display = 'block';
+                list.innerHTML = '<div class="loading-small">Loading answers...</div>';
+                
+                try {
+                    const res = await fetch(`/api/forum/replies/${id}`);
+                    if (!res.ok) throw new Error(`Server returned ${res.status}`);
+                    const replies = await res.json();
+                    
+                    list.innerHTML = replies.length 
+                        ? replies.map(r => `
+                            <div class="reply-item">
+                                <strong>${r.userName}:</strong> ${r.replyText}
+                                ${r.userName === currentUser ? `<span class="del-small" onclick="deleteReply(${r.id}, ${id})">Delete</span>` : ''}
+                            </div>`).join('')
+                        : '<div class="reply-item text-dim">No answers yet.</div>';
+                } catch (err) {
+                    console.error("Fetch Error:", err);
+                    list.innerHTML = `<div class="reply-item">Error: ${err.message}. Check server logs.</div>`;
+                }
+            } else {
+                list.style.display = 'none';
+            }
+        }
+
+        async function submitReply(questionId) {
+            const textInput = document.getElementById(`input-text-${questionId}`);
+            const replyText = textInput.value;
+            const senderName = localStorage.getItem('userName');
+
+            if (!replyText.trim()) return;
+
+            const res = await fetch('/api/forum/reply', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ questionId, senderName, replyText })
+            });
+
+            if (res.ok) {
+                textInput.value = '';
+                const list = document.getElementById(`replies-list-${questionId}`);
+                list.style.display = 'none'; // Close it
+                toggleReplies(questionId); // Re-open to refresh data
+            }
+        }
+
+        async function deleteQuestion(id) {
+            if (!confirm("Delete this discussion?")) return;
+            const userName = localStorage.getItem('userName');
+            await fetch(`/api/forum/question/${id}`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userName })
+            });
+            loadForum();
+        }
+
+        async function deleteReply(replyId, questionId) {
+            const userName = localStorage.getItem('userName');
+            await fetch(`/api/forum/reply/${replyId}`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userName })
+            });
+            const list = document.getElementById(`replies-list-${questionId}`);
+            list.style.display = 'none';
+            toggleReplies(questionId);
+        }
+
+        async function checkNotifications() {
+            const userName = localStorage.getItem('userName');
+            if(!userName) return;
+            try {
+                const res = await fetch(`/api/notifications?name=${userName}`);
+                const alerts = await res.json();
+                const badge = document.getElementById('notifBadge');
+                if (alerts.length > 0) {
+                    badge.innerText = alerts.length;
+                    badge.style.display = 'block';
+                }
+            } catch (err) {}
+        }
+        // Add this inside your loadForum function to check
+console.log("Current User:", localStorage.getItem('userName'));
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Peer-2-Peer Learning</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="logo">Peer-2-Peer Learning</div>
+  <div class="nav-right">
+   <a href="login.html"> <button  class="auth-btn login">Login</button></a>
+   <a href="login.html"><button class="auth-btn signup">Sign Up</button></a>
+    <span id="openNav" class="menu-toggle">☰</span>
+  </div>
+</nav>
+
+<div id="side-menu" class="side-nav">
+  <a href="javascript:void(0)" id="closeNav" class="close-btn">×</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="resources.html">Resources</a></li>
+    <li><a href="school-dashboard.html">Dashboard for Schools</a></li>
+    <li><a href="terms.html">T's & C's</a></li>
+  </ul>
+</div>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Empowering Students Through Peer-to-Peer Learning</h1>
+    <p>A smarter, more relatable way to learn.</p>
+  </div>
+</section>
+
+<section class="upload-section">
+  <h2>Upload Study Materials</h2>
+  <p>Drag and drop files here to share them with the community.</p>
+
+  <input type="text" id="customFileName" placeholder="Enter document name" />
+  <input type="file" id="fileInput" hidden />
+
+  <div id="drop-zone" class="drop-zone">
+    <p id="drop-text">Drop files here or click to select</p>
+  </div>
+
+  <div id="progress-container" style="display:none;">
+    <div id="progress-bar"></div>
+  </div>
+</section>
+
+<script src="script.js"></script>
+<footer>
+
+  <p> 2025 Peer-2Peer. All rights reserved.</p>
+</footer>
+</body>
+</html>

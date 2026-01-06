@@ -1,0 +1,167 @@
+/* === 1. GLOBAL VARIABLES & RESET === */
+:root {
+  --primary-color: #000080;
+  --accent-lime: #32cd32;
+  --white: #ffffff;
+  --bg-light: #f4f7fa;
+  --sidebar-width: 280px;
+  --transition-speed: 0.4s;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background-color: var(--bg-light);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* === 2. NAVBAR (FIXED & WHITE) === */
+#navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+  height: 80px;
+  background-color: var(--primary-color);
+  color: white !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: white !important;
+  letter-spacing: 1px;
+}
+
+.menu-toggle {
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: white !important;
+  transition: transform 0.3s ease;
+}
+
+.menu-toggle:hover {
+  transform: scale(1.1);
+}
+
+/* === 3. SIDEBAR (NO BULLETS) === */
+.side-nav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 0;
+  background-color: var(--primary-color);
+  overflow-x: hidden;
+  transition: width var(--transition-speed) cubic-bezier(0.77, 0, 0.175, 1);
+  padding-top: 100px;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+}
+
+.side-nav.active {
+  width: var(--sidebar-width);
+}
+
+.side-nav ul {
+  list-style: none; /* Removes the dots */
+  padding: 0;
+  margin: 0;
+}
+
+.side-nav ul li {
+  width: 100%;
+}
+
+.side-nav ul li a {
+  padding: 15px 40px;
+  text-decoration: none;
+  font-size: 1.3rem;
+  color: white;
+  display: block;
+  transition: 0.3s;
+  border-left: 5px solid transparent;
+}
+
+.side-nav ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--accent-lime);
+  border-left: 5px solid var(--accent-lime);
+  padding-left: 50px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  font-size: 3rem;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+@media (max-width: 480px) {
+  .hero h1 { font-size: 2rem; }
+  .nav-right { gap: 10px; }
+  .logo { font-size: 1.2rem; }
+}
+  footer {
+        padding: 15px;
+        font-size: 0.9rem;
+        background-color: #000080;
+        align-content: center;
+    }
+
+    /* === 4. MOBILE OPTIMIZATION (PHONES) === */
+@media (max-width: 600px) {
+  /* Update sidebar width to cover more area on small screens */
+  :root {
+    --sidebar-width: 85%;
+  }
+
+  /* Tighten navbar spacing */
+  #navbar {
+    padding: 0 15px;
+    height: 70px;
+  }
+
+  .logo {
+    font-size: 1.3rem;
+  }
+
+  .menu-toggle {
+    font-size: 1.6rem;
+  }
+
+  /* Adjust Sidebar for mobile usability */
+  .side-nav {
+    padding-top: 80px;
+  }
+
+  .side-nav ul li a {
+    padding: 15px 25px;
+    font-size: 1.1rem;
+  }
+
+  .close-btn {
+    top: 15px;
+    left: 20px;
+    font-size: 2.5rem;
+  }
+
+  /* Footer centering and text scaling */
+  footer {
+    text-align: center;
+    padding: 20px 10px;
+    font-size: 0.85rem;
+  }
+}

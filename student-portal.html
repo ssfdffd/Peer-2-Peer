@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal | Peer-2-Peer PRO</title>
+    <link rel="stylesheet" href="student.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="light-mode">
+
+    <nav class="glass-nav">
+        <div class="logo-glow">Peer-2-Peer <span class="premium">PRO</span></div>
+        
+        <div class="nav-right">
+            <div class="search-luxury">
+                <i class="fas fa-search"></i>
+                <input type="text" id="globalSearch" placeholder="Search resources..." onkeyup="filterAll()">
+            </div>
+            
+            <button class="logout-minimal" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </nav>
+
+    <div class="dashboard-wrapper">
+        
+        <aside class="side-panel">
+            <div class="profile-summary">
+                <div class="avatar-circle"><i class="fas fa-user-graduate"></i></div>
+                <h3 id="studentNameDisplay">Loading...</h3>
+                <span class="badge-glass">Verified Learner</span>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="student-upload.html"><i class="fas fa-cloud-upload-alt"></i> Share Notes</a></li>
+                <li><a href="forum.html"><i class="fas fa-comments"></i> Student Forum</a></li>
+            </ul>
+
+            <div class="ask-box-sidebar">
+                <h4><i class="fas fa-question-circle"></i> Ask Community</h4>
+                <textarea id="forumQuestion" placeholder="Stuck on a problem? Ask here..."></textarea>
+                <button class="btn-ask" onclick="submitToForum()">Post to Forum</button>
+            </div>
+        </aside>
+
+        <main class="main-panel">
+            
+            <section class="portal-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-broadcast-tower"></i> Live Learning Studios</h3>
+                    <div class="search-luxury mini">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="liveSearch" placeholder="Filter topics..." onkeyup="filterLive()">
+                    </div>
+                </div>
+                
+                <div id="liveGrid" class="live-grid">
+                    <div class="loading-state">Checking for live sessions...</div>
+                </div>
+            </section>
+
+            <section class="library-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-folder-open"></i> Study Library</h3>
+                    <span id="fileCount" class="badge-count">0 files</span>
+                </div>
+
+                 <div class="category-filter-wrapper">
+                <button class="filter-pill active" onclick="filterByCategory('All')">All Resources</button>
+                <button class="filter-pill" onclick="filterByCategory('Mathematics')">Math</button>
+                <button class="filter-pill" onclick="filterByCategory('Physical Sciences')">Science</button>
+                <button class="filter-pill" onclick="filterByCategory('Accounting')">Accounting</button>
+                <button class="filter-pill" onclick="filterByCategory('English')">English</button>
+            </div>
+
+                
+                <div id="fileFeed" class="file-grid">
+                    <div class="loading-state">Fetching materials...</div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="student.js"></script>
+</body>
+</html>

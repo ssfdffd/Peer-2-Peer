@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Payment | Peer-2-Peer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="payment.css">
+</head>
+<body>
+
+<div class="payment-card">
+    <div class="header">
+        <i class="fas fa-university"></i>
+        <h2>Manual Payment</h2>
+        <p>Transfer the lesson fee to the account below and upload your receipt to unlock live sessions.</p>
+    </div>
+
+    <div class="bank-details">
+        <div class="bank-row">
+            <span class="label">Bank:</span>
+            <span class="value">Standard Bank</span>
+        </div>
+        <div class="bank-row">
+            <span class="label">Account Holder:</span>
+            <span class="value">Peer-2-Peer Education</span>
+        </div>
+        <div class="bank-row">
+            <span class="label">Account No:</span>
+            <span class="value">10123456789</span>
+        </div>
+        <div class="bank-row">
+            <span class="label">Reference:</span>
+            <span id="refValue" class="value" style="color: #e11d48;">Loading...</span>
+        </div>
+    </div>
+
+    <div class="upload-box" id="dropZone">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <p id="fileName">Click or Drag & Drop Receipt (Image/PDF)</p>
+        <input type="file" id="fileInput" accept="image/*,application/pdf">
+    </div>
+
+    <button id="submitBtn" class="btn-submit" disabled>Submit Verification</button>
+    
+    <div id="statusMsg" class="status-msg"></div>
+</div>
+
+<script src="payment.js"></script>
+</body>
+</html>

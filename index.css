@@ -1,0 +1,477 @@
+/* === Custom CSS Variables === */
+:root {
+  --primary-color: #000080; /* Navy Blue */
+  --secondary-color: #f0f8ff; /* Alice Blue */
+  --text-color: #333;
+  --light-text: #ffffff;
+  --accent-color: #32cd32; 
+  --transition-speed: 0.4s;
+  --overlay-dark: rgba(0, 0, 0, 0.6);
+}
+
+/* === Base Styles === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--secondary-color);
+  overflow-x: hidden;
+}
+
+
+/* === Main Navbar Styling === */
+#navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5%;
+  background-color: var(--primary-color);
+  color: var(--light-text);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Auth Buttons */
+.auth-btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition-speed);
+  border: none;
+}
+
+.login {
+  background: transparent;
+  color: white;
+  border: 1px solid white;
+}
+
+.login:hover {
+  background: white;
+  color: var(--primary-color);
+}
+
+.signup {
+  background: var(--accent-color);
+  color: white;
+}
+
+.signup:hover {
+  background: #28b528;
+  transform: translateY(-2px);
+}
+
+.menu-toggle {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: white;
+}
+
+/* === Side Sliding Navigation === */
+.side-nav {
+  height: 100%;
+  width: 0; /* Hidden by default */
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 0;
+  background-color: var(--primary-color);
+  overflow-x: hidden;
+  transition: var(--transition-speed) cubic-bezier(0.77, 0, 0.175, 1);
+  padding-top: 80px;
+  box-shadow: -10px 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.side-nav.active {
+  width: 300px;
+}
+
+.side-nav ul {
+  list-style: none;
+  padding: 0 40px;
+}
+
+.side-nav ul li {
+  margin-bottom: 25px;
+}
+
+.side-nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.side-nav ul li a:hover {
+  color: orange;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  left: 25px;
+  font-size: 2.5rem;
+  color: white;
+  text-decoration: none;
+}
+
+/* === Hero Section & Background Slider === */
+.hero {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  background-size: cover;
+  background-position: center;
+  /* Automatically cycles through 3 images */
+  animation: backgroundSlider 15s infinite ease-in-out;
+}
+
+@keyframes backgroundSlider {
+  0%, 100% { 
+    background-image: linear-gradient(var(--overlay-dark), var(--overlay-dark)), url('hero.jpeg'); 
+  }
+  33% { 
+    background-image: linear-gradient(var(--overlay-dark), var(--overlay-dark)), url('hero2.jpeg'); 
+  }
+  66% { 
+    background-image: linear-gradient(var(--overlay-dark), var(--overlay-dark)), url('hero3.jpeg'); 
+  }
+}
+
+.hero-content {
+  padding: 0 20px;
+  z-index: 10;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  max-width: 900px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.hero p {
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+  max-width: 750px;
+  font-weight: 300;
+}
+
+.cta-btn {
+  padding: 1rem 2.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
+  background-color: blue;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.cta-btn:hover {
+  background-color: green;
+  transform: scale(1.05);
+}
+
+/* === Upload/Information Section === */
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #000080;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #32cd32;
+}
+
+/* Progress Bar Styling */
+.progress-container {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.progress-wrapper {
+    background: #e0e0e0;
+    border-radius: 10px;
+    height: 10px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.progress-bar {
+    background: #32cd32;
+    width: 0%;
+    height: 100%;
+    transition: width 0.3s ease;
+}
+
+#progress-text {
+    font-size: 0.85rem;
+    color: #666;
+}
+/* Upload Section Centering */
+
+.upload-section {
+  padding: 80px 10%;
+  background: white;
+  
+  /* Centering Logic */
+  display: flex;
+  flex-direction: column;
+  align-items: center;    /* Centers items horizontally */
+  justify-content: center; /* Centers items vertically if height is set */
+  text-align: center;      /* Centers the text lines within their containers */
+}
+
+.upload-section h2 {
+  color: var(--primary-color);
+  margin-bottom: 15px;
+  font-size: 2.5rem;
+  align-items: center;
+  width: 100%;             /* Ensures text-align: center works across full width */
+}
+
+.upload-section p {
+  color: #555;
+  font-size: 1.2rem;
+  
+  align-self: center;
+  max-width: 600px;        /* Limits width to keep text readable and centered */
+  margin-bottom: 30px;
+}
+
+.filename-input {
+  margin-top: 20px;
+  padding: 10px;
+  width: 90%;
+  max-width: 400px;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.progress-container {
+  width: 80%;
+  height: 10px;
+  background: #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 15px;
+  display: none;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--primary-color);
+  transition: width 0.3s ease;
+}
+/* Centering the Drop Zone itself */
+.drop-zone {
+  margin: 0 auto;          /* Standard centering for block elements */
+  width: 100%;
+  max-width: 800px;        /* Prevents it from getting too wide on desktop */
+  height: 250px;
+  border: 3px dashed #cbd5e0;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fafbfc;
+  transition: all 0.3s ease;
+}
+
+/* === File Dropzone Section === */
+.upload-section {
+  padding: 80px 10%;
+  text-align: center;
+  background: white;
+}
+
+.upload-section h2 {
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.drop-zone {
+  margin-top: 30px;
+  height: 250px;
+  border: 3px dashed #cbd5e0;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  background-color: #fafbfc;
+}
+
+.drop-zone:hover, .drop-zone.dragover {
+  border-color: var(--primary-color);
+  background-color: #ebf4ff;
+}
+
+.drop-zone i {
+  font-size: 4rem;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+
+.drop-zone p {
+  font-size: 1.1rem;
+  color: #718096;
+}
+
+/* === Responsive Design === */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.5rem; }
+  .hero p { font-size: 1.1rem; }
+  .menu-toggle { 
+    display: block;
+    cursor: pointer;
+  }
+  
+  /* Hide text buttons on very small screens if needed, 
+     but keeping them for now for usability */
+  .auth-btn { padding: 0.5rem 1rem; font-size: 0.9rem; }
+}
+
+@media (max-width: 480px) {
+  .hero h1 { font-size: 2rem; }
+  .nav-right { gap: 10px; }
+  .logo { font-size: 1.2rem; }
+}
+  footer {
+        padding: 15px;
+        font-size: 0.9rem;
+        background-color: #000080;
+        align-content: center;
+    }
+
+    /* === 10. MOBILE OPTIMIZATION (PHONES) === */
+@media (max-width: 600px) {
+  /* 1. Navbar Adjustments */
+  #navbar {
+    padding: 0.8rem 15px;
+  }
+
+  .logo {
+    font-size: 1.1rem;
+  }
+
+  /* 2. Side Navigation - Ensure it covers more screen on small phones */
+  .side-nav.active {
+    width: 85%;
+  }
+
+  /* 3. Hero Section Scaling */
+  .hero {
+    min-height: 80vh; /* Slightly shorter to show content below */
+  }
+
+  .hero h1 {
+    font-size: 1.8rem !important; /* Forces smaller title for small screens */
+    line-height: 1.2;
+  }
+
+  .hero p {
+    font-size: 1rem !important;
+    padding: 0 10px;
+  }
+
+  .cta-btn {
+    padding: 0.8rem 1.8rem;
+    font-size: 1rem;
+    width: 90%; /* Make button easier to tap */
+  }
+
+  /* 4. Upload Section & Drop Zone */
+  .upload-section {
+    padding: 40px 15px;
+  }
+
+  .upload-section h2 {
+    font-size: 1.8rem;
+  }
+
+  .drop-zone {
+    height: 200px; /* Smaller height for mobile */
+    padding: 20px;
+  }
+
+  .drop-zone i {
+    font-size: 2.5rem;
+  }
+
+  .drop-zone p {
+    font-size: 0.9rem;
+  }
+
+  /* 5. Inputs and Progress Bar */
+  .filename-input {
+    width: 100%;
+  }
+
+  .progress-container {
+    width: 100%;
+  }
+
+  /* 6. Auth Buttons - Stack if they collide with logo */
+  .nav-right {
+    gap: 8px;
+  }
+
+  .auth-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+}

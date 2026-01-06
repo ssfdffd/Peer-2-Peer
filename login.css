@@ -1,0 +1,329 @@
+/* === 1. GLOBAL VARIABLES & RESET === */
+:root {
+  --primary-color: #000080;
+  --accent-lime: #32cd32;
+  --white: #ffffff;
+  --bg-light: #f4f7fa;
+  --sidebar-width: 280px;
+  --transition-speed: 0.4s;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background-color: var(--bg-light);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* === 2. NAVBAR (FIXED & WHITE) === */
+#navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+  height: 80px;
+  background-color: var(--primary-color);
+  color: white !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: white !important;
+  letter-spacing: 1px;
+}
+
+.menu-toggle {
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: white !important;
+  transition: transform 0.3s ease;
+}
+
+.menu-toggle:hover {
+  transform: scale(1.1);
+}
+
+/* === 3. SIDEBAR (NO BULLETS) === */
+.side-nav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 0;
+  background-color: var(--primary-color);
+  overflow-x: hidden;
+  transition: width var(--transition-speed) cubic-bezier(0.77, 0, 0.175, 1);
+  padding-top: 100px;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+}
+
+.side-nav.active {
+  width: var(--sidebar-width);
+}
+
+.side-nav ul {
+  list-style: none; /* Removes the dots */
+  padding: 0;
+  margin: 0;
+}
+
+.side-nav ul li {
+  width: 100%;
+}
+
+.side-nav ul li a {
+  padding: 15px 40px;
+  text-decoration: none;
+  font-size: 1.3rem;
+  color: white;
+  display: block;
+  transition: 0.3s;
+  border-left: 5px solid transparent;
+}
+
+.side-nav ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--accent-lime);
+  border-left: 5px solid var(--accent-lime);
+  padding-left: 50px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  font-size: 3rem;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* === 4. SPLIT-SCREEN LAYOUT === */
+.split-screen-wrapper {
+  display: flex;
+  min-height: calc(100vh - 80px);
+  animation: slideUp 0.8s ease-out;
+}
+
+.auth-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 40px;
+}
+
+.login-side {
+  background-color: var(--white);
+}
+
+.signup-side {
+  background-color: var(--primary-color);
+  color: white;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05);
+}
+
+.form-box {
+  width: 100%;
+  max-width: 450px;
+}
+
+.form-box h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: inherit;
+}
+
+.form-box p {
+  margin-bottom: 30px;
+  opacity: 0.8;
+}
+
+/* === 5. FORM INPUTS & BUTTONS === */
+.input-row {
+  display: flex;
+  gap: 20px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  flex: 1;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: inherit;
+}
+
+.input-group input, 
+.input-group select {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: 2px solid #eee;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.3s;
+}
+
+.signup-side .input-group input {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.input-group input:focus {
+  border-color: var(--accent-lime);
+  box-shadow: 0 0 10px rgba(50, 205, 50, 0.2);
+}
+
+.auth-btn {
+  width: 100%;
+  padding: 16px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+  background-color: var(--primary-color);
+  color: white;
+  margin-top: 10px;
+}
+
+.signup-btn {
+  background-color: var(--accent-lime);
+}
+
+.signup-btn:hover {
+  background-color: #28a428;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.login-side .auth-btn:hover {
+  background-color: #0000cc;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* === 6. ANIMATIONS & RESPONSIVE === */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+@media (max-width: 1024px) {
+  .split-screen-wrapper {
+    flex-direction: column;
+  }
+  .auth-section {
+    padding: 80px 20px;
+  }
+}
+/* Loading Spinner Animation */
+.spinner {
+  display: none; /* Hidden by default */
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+  margin-left: 10px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* State when button is processing */
+.auth-btn.loading {
+  background-color: #555 !important;
+  cursor: not-allowed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-btn.loading .spinner {
+  display: inline-block;
+}
+
+/* === 7. MOBILE RESPONSIVE (PHONES) === */
+@media (max-width: 600px) {
+  /* Reduce navbar height and padding */
+  #navbar {
+    height: 65px;
+    padding: 0 15px;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+  }
+
+  /* Ensure the sidebar doesn't take over the whole screen width */
+  :root {
+    --sidebar-width: 80%;
+  }
+
+  /* Stack the Login and Signup sections vertically */
+  .split-screen-wrapper {
+    flex-direction: column;
+  }
+
+  /* Ensure each section takes full width and adjusts padding */
+  .auth-section {
+    width: 100%;
+    padding: 40px 20px;
+    min-height: auto;
+  }
+
+  /* Force input rows (First Name/Last Name) to stack vertically */
+  .input-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Typography adjustments for smaller screens */
+  .form-box h2 {
+    font-size: 1.6rem;
+  }
+
+  .form-box p {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+
+  /* Adjust buttons for easier thumb-tapping */
+  .auth-btn {
+    padding: 14px;
+    font-size: 1rem;
+  }
+
+  /* Side navigation adjustment for easier closing */
+  .side-nav ul {
+    padding-top: 20px;
+  }
+  
+  .side-nav ul li a {
+    font-size: 1.1rem;
+    padding: 12px 30px;
+  }
+}

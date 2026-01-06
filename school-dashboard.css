@@ -1,0 +1,131 @@
+:root {
+    --inst-navy: #0f172a;
+    --inst-blue: #2563eb;
+    --inst-bg: #f8fafc;
+    --white: #ffffff;
+    --border: #e2e8f0;
+}
+
+body {
+    background-color: var(--inst-bg);
+    color: var(--inst-navy);
+    font-family: 'Inter', sans-serif;
+}
+
+/* Institutional Hero */
+.school-hero {
+    background: var(--inst-navy);
+    color: white;
+    padding: 40px 80px;
+    margin-bottom: -40px;
+}
+
+.school-tag {
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--inst-blue);
+    padding: 6px 15px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+/* Action Card */
+.launch-card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-top: 4px solid var(--inst-blue);
+}
+
+.launch-form {
+    display: flex;
+    gap: 15px;
+}
+
+.launch-form input, .launch-form select {
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: #f1f5f9;
+}
+
+.btn-launch {
+    background: var(--inst-blue);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-launch:hover {
+    background: #1d4ed8;
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.content-card {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+}
+
+/* === MOBILE RESPONSIVE (INSTITUTIONAL DASHBOARD) === */
+@media (max-width: 768px) {
+    /* 1. Hero Section Adjustments */
+    .school-hero {
+        padding: 40px 20px; /* Reduced horizontal padding */
+        text-align: center;
+    }
+
+    /* 2. Launch Card: Row to Column */
+    .launch-card {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .launch-form {
+        flex-direction: column; /* Stack input and select */
+        gap: 10px;
+    }
+
+    .launch-form input, 
+    .launch-form select, 
+    .btn-launch {
+        width: 100%; /* Full width for easier thumb-tapping */
+        font-size: 1rem;
+    }
+
+    /* 3. Grid Layout: 2-Column to 1-Column */
+    .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    /* 4. Content Card Polish */
+    .content-card {
+        padding: 20px;
+    }
+}
+
+/* Landscape/Small Tablet Tweak */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .school-hero {
+        padding: 40px;
+    }
+}

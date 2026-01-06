@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peer-2-Peer Learning | Join Us</title>
+  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<nav id="navbar">
+    <div class="logo">Peer-2-Peer Library</div>
+    <div class="nav-right">
+        <div class="menu-toggle" id="openNav"><i class="fas fa-bars"></i></div>
+    </div>
+  </nav>
+
+<div id="side-menu" class="side-nav">
+  <a href="javascript:void(0)" id="closeNav" class="close-btn">×</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="resources.html">Resources</a></li>
+    <li><a href="live.html">Live Lesson</a></li>
+    <li><a href="terms.html">T's & C's</a></li>
+  </ul>
+</div>
+
+<div class="split-screen-wrapper">
+    <div class="auth-section login-side">
+        <div class="form-box">
+            <h2>Welcome Back</h2>
+            <p>Login to continue your learning journey.</p>
+            <form id="loginForm">
+                <div class="input-group">
+    <label><i class="fas fa-user"></i> Name</label> <input type="text" id="loginUser" placeholder="Enter your Name" required>
+</div>
+                <div class="input-group">
+                    <label><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="loginPass" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="auth-btn">Sign In</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="auth-section signup-side">
+        <div class="form-box">
+            <h2>Create Account</h2>
+            <p>Join the community today.</p>
+            <form id="signupForm">
+                <div class="input-row">
+                    <div class="input-group"><label>Name</label><input type="text" id="regName" required></div>
+                    <div class="input-group"><label>Surname</label><input type="text" id="regSurname" required></div>
+                </div>
+                <div class="input-row">
+                    <div class="input-group"><label>Age</label><input type="number" id="regAge" required></div>
+                    <div class="input-group"><label>Phone</label><input type="tel" id="regPhone" required></div>
+                </div>
+                <div class="input-group"><label>School</label><input type="text" id="regSchool" required></div>
+                <div class="input-group"><label>Email</label><input type="email" id="regEmail" required></div>
+                <div class="input-group">
+                    <label>User Type</label>
+                    <select id="regUserType">
+                        <option value="student">Student</option>
+                        <option value="tutor">Tutor</option>
+                    </select>
+                </div>
+                <div class="input-group"><label>Password</label><input type="password" id="regPass" required></div>
+                <div class="input-group">
+    <label>School Code (If applicable)</label>
+    <input type="text" id="regSchoolCode" placeholder="Enter your school code">
+</div>
+                <button type="submit" class="auth-btn signup-btn" id="signupBtn">Sign Up</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="login.js"></script>
+</body>
+</html>

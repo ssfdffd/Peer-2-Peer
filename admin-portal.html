@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Global Admin Control | Peer-2-Peer Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <nav class="admin-nav-bar">
+        <div class="nav-brand"><i class="fas fa-shield-alt"></i> P2P <span class="badge-admin">SYSTEM ADMIN</span></div>
+        <ul class="nav-links">
+            <li><a href="#broadcast">Broadcast</a></li>
+            <li><a href="#verifications">Verifications</a></li>
+            <li><a href="#database">Database</a></li>
+        </ul>
+        <div class="nav-user">
+            <span id="adminNameDisplay"></span>
+            <button onclick="logout()" class="logout-btn" title="Logout"><i class="fas fa-power-off"></i></button>
+        </div>
+    </nav>
+
+    <div class="dashboard-wrapper">
+        <header class="page-header">
+            <h1>Master Command Dashboard</h1>
+            <p>Full system oversight and database management</p>
+        </header>
+
+        <div class="admin-grid">
+            <section id="broadcast" class="control-card">
+                <h3><i class="fas fa-broadcast-tower"></i> Global Live Broadcast</h3>
+                <div class="form-group">
+                    <input type="text" id="meetingTopic" placeholder="Lesson Topic (e.g. Exam Prep)">
+                    <input type="text" id="meetingLink" placeholder="Zoom/Google Meet Link">
+                    <div class="live-actions">
+                        <button onclick="toggleSession(true)" class="btn-start">Go Live</button>
+                        <button onclick="toggleSession(false)" class="btn-end">End</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="verifications" class="control-card">
+                <h3><i class="fas fa-file-invoice-dollar"></i> Pending Verifications</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr><th>Student</th><th>Receipt</th><th>Action</th></tr>
+                        </thead>
+                        <tbody id="pendingBody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="database" class="control-card full-width">
+                <div class="card-header">
+                    <h3><i class="fas fa-database"></i> User & Institutional Database</h3>
+                    <div class="filter-group">
+                        <button onclick="fetchDatabase('users')" class="btn-verify">View All Users</button>
+                        <button onclick="fetchDatabase('schools')" class="btn-verify" style="background:var(--admin-blue)">View All Schools</button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="masterTable">
+                        <thead id="masterHead"></thead>
+                        <tbody id="masterBody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="control-card full-width">
+                <div class="card-header">
+                    <h3><i class="fas fa-calculator"></i> Teacher Payroll Overview</h3>
+                    <button onclick="downloadPayrollCSV()" class="btn-csv"><i class="fas fa-file-csv"></i> Export CSV</button>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr><th>Teacher</th><th>Total Students</th><th>Sessions</th><th>Estimated Pay</th></tr>
+                        </thead>
+                        <tbody id="payrollBody"></tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <section class="control-card full-width">
+    <h3><i class="fas fa-plus-circle"></i> Register New School Partner</h3>
+    <div class="form-group school-form-horizontal">
+        <input type="text" id="newSchoolName" placeholder="School Name (e.g., West High)">
+        <input type="text" id="newSchoolCode" placeholder="Unique Partnership Code (e.g., WEST2025)">
+        <button onclick="createNewSchool()" class="btn-verify" style="padding: 12px 25px;">
+            <i class="fas fa-save"></i> Create Partnership
+        </button>
+    </div>
+</section>
+
+    <footer class="admin-footer">
+        <p>&copy; 2025 P2P Pro Learning Systems | Global Admin Panel v2.4</p>
+        <div class="footer-status">System Status: <span class="status-online">Online</span></div>
+    </footer>
+
+    <script src="admin.js"></script>
+</body>
+</html>

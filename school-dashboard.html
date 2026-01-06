@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Institutional Command | Peer-2-Peer Pro</title>
+    <link rel="stylesheet" href="school-dash.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body data-theme="light">
+    <nav class="glass-nav">
+        <div class="nav-content">
+            <div class="logo-glow">P2P <span class="premium">INSTITUTIONAL</span></div>
+            <div class="school-tag"><i class="fas fa-university"></i> St. Andrews Academy</div>
+            <button onclick="logout()" class="logout-minimal"><i class="fas fa-power-off"></i></button>
+        </div>
+    </nav>
+
+    <header class="school-hero">
+        <div class="hero-content">
+            <h1>Teacher Dashboard</h1>
+            <p>Manage your virtual classrooms and private school resources.</p>
+        </div>
+    </header>
+
+    <div class="dashboard-wrapper">
+        <aside class="admin-sidebar">
+            <div class="stat-box">
+                <span class="stat-label">License Status</span>
+                <span class="stat-value pulse-green">Active Gold</span>
+            </div>
+            <nav class="admin-nav">
+                <a href="#" class="active"><i class="fas fa-chalkboard-teacher"></i> Classrooms</a>
+                <a href="#"><i class="fas fa-users"></i> Student Roster</a>
+                <a href="#"><i class="fas fa-file-invoice-dollar"></i> School Plan</a>
+            </nav>
+        </aside>
+
+        <main class="main-panel">
+            <section class="action-card launch-card">
+                <div class="card-info">
+                    <h3>Host Private Class</h3>
+                    <p>Start a secure session only accessible to your school's students.</p>
+                </div>
+                <div class="launch-form">
+                    <input type="text" id="classTopic" placeholder="Lesson Topic (e.g. Organic Chemistry)">
+                    <select id="gradeLevel">
+                        <option>Grade 10</option>
+                        <option>Grade 11</option>
+                        <option>Grade 12</option>
+                    </select>
+                    <button class="btn-launch" onclick="startSchoolSession()">Start Session</button>
+                </div>
+            </section>
+
+            <div class="grid-2">
+                <div class="content-card">
+                    <h4><i class="fas fa-chart-line"></i> Engagement</h4>
+                    <div class="placeholder-chart">
+                        
+                    </div>
+                </div>
+                <div class="content-card">
+                    <h4><i class="fas fa-folder-plus"></i> Private Library</h4>
+                    <p>Only your school's students can see these files.</p>
+                    <button class="btn-outline">Manage Files</button>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

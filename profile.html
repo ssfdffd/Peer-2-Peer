@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile | Peer-2-Peer</title>
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="auth-container" style="max-width: 600px; margin-top: 50px;">
+        <h2><i class="fas fa-id-card"></i> Student Profile</h2>
+        <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+        
+        <div id="profileContent" class="profile-details" style="text-align: left;">
+            <p>Loading profile...</p>
+        </div>
+
+        <button onclick="logout()" class="auth-btn" style="background: var(--error-red); margin-top: 20px;">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+    </div>
+    <div id="profileContent" class="profile-details">
+    </div>
+
+<div class="profile-actions" style="display: flex; gap: 10px;">
+    <button id="editBtn" onclick="toggleEdit()" class="auth-btn" style="background: var(--accent-lime);">
+        <i class="fas fa-edit"></i> Edit Profile
+    </button>
+    <button id="saveBtn" onclick="saveProfile()" class="auth-btn" style="display: none; background: #28a428;">
+        <i class="fas fa-save"></i> Save Changes
+    </button>
+</div>
+
+    <script src="profile.js"></script>
+    <footer> 
+        <p>&copy; 2025 Peer-2-Peer. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

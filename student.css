@@ -1,0 +1,686 @@
+:root {
+    --bg-dark: #0f172a;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --accent-blue: #38bdf8;
+    --accent-purple: #818cf8;
+    --text-main: #f8fafc;
+    --text-dim: #94a3b8;
+    --neon-glow: 0 0 15px rgba(56, 189, 248, 0.4);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at top left, #1e293b, #0f172a);
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+/* Fix for Forum Post and Reply text visibility */
+.light-mode #forumQuestion, 
+.light-mode .reply-section input,
+.light-mode .mini-search {
+    color: #1e293b !important; /* Force Dark Charcoal text */
+    background-color: #f8fafc !important; /* Light grayish-blue background */
+    border: 1px solid #cbd5e1 !important;
+}
+
+/* Ensure placeholder text is also visible but slightly dimmed */
+.light-mode #forumQuestion::placeholder,
+.light-mode .reply-section input::placeholder {
+    color: #94a3b8;
+}
+
+/* Ensure the text stays black while typing */
+#forumQuestion:focus, 
+.reply-section input:focus {
+    color: #1e293b !important;
+    background: #ffffff !important;
+    outline: 2px solid var(--accent-blue);
+}
+/* Add this to student.css to ensure reply text is visible */
+.reply-section input {
+    color: #000000 !important;
+    background: #ffffff !important;
+}
+/* Ensure the input text is black and readable */
+.black-typing {
+    color: #1e293b !important; 
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1;
+    padding: 10px;
+    border-radius: 8px;
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+/* Dropdown styling */
+.replies-dropdown {
+    background: #f1f5f9;
+    margin-top: 10px;
+    border-radius: 8px;
+    padding: 10px;
+    border-left: 4px solid var(--accent-blue);
+}
+
+.reply-item {
+    padding: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 0.9rem;
+    color: #334155;
+}
+
+.reply-item:last-child { border-bottom: none; }
+
+.reply-input-box {
+    display: flex;
+    margin-top: 10px;
+    padding: 10px;
+    background: #e2e8f0;
+    border-radius: 8px;
+}
+
+/* Ensure the input text is black and readable */
+.black-typing {
+    color: #1e293b !important; 
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1;
+    padding: 10px;
+    border-radius: 8px;
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+/* Dropdown styling */
+.replies-dropdown {
+    background: #f1f5f9;
+    margin-top: 10px;
+    border-radius: 8px;
+    padding: 10px;
+    border-left: 4px solid var(--accent-blue);
+}
+
+.reply-item {
+    padding: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 0.9rem;
+    color: #334155;
+}
+
+.reply-item:last-child { border-bottom: none; }
+
+.reply-input-box {
+    display: flex;
+    margin-top: 10px;
+    padding: 10px;
+    background: #e2e8f0;
+    border-radius: 8px;
+}
+.delete-btn {
+    background: transparent;
+    border: none;
+    color: #cbd5e1;
+    cursor: pointer;
+    transition: 0.3s;
+    float: right;
+}
+
+.delete-btn:hover {
+    color: #ef4444; /* Premium Red */
+}
+
+.del-small {
+    font-size: 0.7rem;
+    color: #94a3b8;
+    margin-left: 10px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.del-small:hover {
+    color: #ef4444;
+}
+/* --- NAVIGATION --- */
+.glass-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--glass-border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-glow {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.premium {
+    color: var(--accent-blue);
+    text-shadow: var(--neon-glow);
+}
+
+.search-luxury {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 30px;
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.search-luxury:focus-within {
+    border-color: var(--accent-blue);
+    box-shadow: var(--neon-glow);
+}
+
+.search-luxury input {
+    background: none;
+    border: none;
+    color: white;
+    margin-left: 10px;
+    outline: none;
+    width: 250px;
+}
+
+
+.logout-minimal {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: 20px;
+    transition: 0.3s;
+}
+
+.logout-minimal:hover {
+    color: #ff4757;
+}
+
+/* --- LAYOUT WRAPPER --- */
+.dashboard-wrapper {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 20px;
+    padding: 25px 5%;
+}
+
+/* --- SIDEBAR --- */
+.side-panel {
+    background: var(--glass-bg);
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid var(--glass-border);
+    height: fit-content;
+}
+
+.profile-summary {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.avatar-circle {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(45deg, var(--accent-blue), var(--accent-purple));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 15px;
+}
+
+.badge-glass {
+    font-size: 0.7rem;
+    background: rgba(56, 189, 248, 0.1);
+    color: var(--accent-blue);
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.nav-links {
+    list-style: none;
+}
+
+.nav-links li a {
+    display: block;
+    padding: 12px 15px;
+    color: var(--text-dim);
+    text-decoration: none;
+    border-radius: 10px;
+    transition: 0.3s;
+    margin-bottom: 5px;
+}
+
+.nav-links li a:hover, .nav-links li a.active {
+    background: var(--glass-bg);
+    color: white;
+    border-left: 4px solid var(--accent-blue);
+}
+
+/* --- ASK BOX SIDEBAR --- */
+.ask-box-sidebar {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--glass-border);
+}
+
+.ask-box-sidebar textarea {
+    width: 100%;
+    height: 100px;
+    background: rgba(0,0,0,0.2);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    color: white;
+    padding: 10px;
+    margin: 10px 0;
+    resize: none;
+}
+
+.btn-ask {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-ask:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--neon-glow);
+}
+
+/* --- MAIN PANEL --- */
+.main-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.section-header h3 {
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* --- LIVE GRID --- */
+.live-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.live-card-mini {
+    background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.live-tag {
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: #ff4757;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.pulse {
+    width: 8px;
+    height: 8px;
+    background: #ff4757;
+    border-radius: 50%;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+/* --- FILTER PILLS --- */
+.category-filter-wrapper {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-pill {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-dim);
+    padding: 8px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.filter-pill.active, .filter-pill:hover {
+    background: var(--accent-blue);
+    color: white;
+    border-color: var(--accent-blue);
+}
+
+/* --- FILE GRID --- */
+.file-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.file-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.file-card:hover {
+    background: rgba(255,255,255,0.08);
+    transform: translateY(-5px);
+}
+
+.file-icon-box {
+    font-size: 2.5rem;
+    color: var(--accent-blue);
+    margin-bottom: 15px;
+}
+
+.file-title {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.file-meta {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-bottom: 15px;
+}
+
+.btn-download-luxury {
+    display: inline-block;
+    padding: 8px 15px;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    transition: 0.3s;
+}
+
+.btn-download-luxury:hover {
+    background: white;
+    color: var(--bg-dark);
+}
+
+/* --- RATING STARS --- */
+.rating-box {
+    margin: 10px 0;
+}
+
+.stars {
+    color: #fbbf24;
+    cursor: pointer;
+}
+
+.badge-count {
+    background: var(--glass-bg);
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    color: var(--accent-blue);
+}
+
+.mini-search {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+} 
+/* --- LUXURY LIGHT MODE OVERRIDES --- */
+body.light-mode {
+    background: #f4f7fa; /* Light grey-blue background */
+    color: #1e293b;
+}
+
+.light-mode .glass-nav {
+    background: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.light-mode .side-panel, 
+.light-mode .file-card, 
+.light-mode .live-card-mini {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.light-mode .logo-glow { color: #0f172a; }
+
+.light-mode .nav-links li a { color: #64748b; }
+.light-mode .nav-links li a:hover, 
+.light-mode .nav-links li a.active {
+    background: #f1f5f9;
+    color: #38bdf8;
+}
+
+/* Fix Logout Position */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logout-minimal {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #fee2e2;
+    color: #dc2626;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Live Lesson Card Light Version */
+.light-mode .live-card-mini {
+    border-top: 4px solid #38bdf8;
+}
+
+.light-mode .text-dim { color: #64748b; }
+
+.light-mode .search-luxury {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+}
+.light-mode .search-luxury input { color: #1e293b; }
+/* --- NOTIFICATION HUB --- */
+.notification-hub {
+    position: relative;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+#bellIcon {
+    font-size: 1.3rem;
+    color: var(--text-dim);
+    transition: 0.3s;
+}
+
+#bellIcon:hover { color: var(--accent-blue); }
+
+.badge-red {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ff4757;
+    color: white;
+    font-size: 0.65rem;
+    padding: 2px 6px;
+    border-radius: 50%;
+    border: 2px solid white;
+    font-weight: bold;
+}
+
+.notif-box {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    width: 300px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border: 1px solid #e2e8f0;
+    z-index: 1001;
+    overflow: hidden;
+    display: none; /* Toggled via JS */
+}
+
+.notif-box h4 {
+    padding: 15px;
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 0.9rem;
+}
+
+.notif-item {
+    padding: 12px 15px;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.85rem;
+    transition: 0.2s;
+}
+
+.notif-item:hover { background: #f1f9ff; }
+
+.notif-item small {
+    display: block;
+    color: #94a3b8;
+    margin-top: 4px;
+}
+
+/* === 15. MOBILE GLASS DASHBOARD RESPONSIVE === */
+@media (max-width: 992px) {
+    /* Transform 2-column grid into 1-column */
+    .dashboard-wrapper {
+        grid-template-columns: 1fr;
+        padding: 15px 3%;
+        gap: 30px;
+    }
+
+    /* Make Sidebar full width and move it below main content if desired */
+    /* Or keep it at top for Profile info */
+    .side-panel {
+        padding: 20px;
+    }
+
+    /* Hide luxury search on tablet/mobile to avoid crowding the logo */
+    .search-luxury {
+        display: none; 
+    }
+}
+
+@media (max-width: 600px) {
+    /* Navbar Adjustments */
+    .glass-nav {
+        padding: 0.8rem 15px;
+    }
+
+    .logo-glow {
+        font-size: 1.2rem;
+    }
+
+    /* Adjust Logout Button to be icon-only on very small screens */
+    .logout-minimal span {
+        display: none;
+    }
+
+    .logout-minimal {
+        padding: 8px;
+        margin-left: 10px;
+    }
+
+    /* Main Sections Scaling */
+    .section-header h3 {
+        font-size: 1.1rem;
+    }
+
+    /* Live & File Grids: Force Single Column */
+    .live-grid, .file-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Forum/Reply Inputs */
+    .reply-input-box {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .black-typing {
+        margin-right: 0;
+        width: 100%;
+    }
+
+    /* Notification Box Scaling */
+    .notif-box {
+        position: fixed;
+        top: 60px;
+        right: 10px;
+        left: 10px;
+        width: auto;
+        z-index: 2000;
+    }
+
+    /* Category Filter Pills - enable horizontal scrolling */
+    .category-filter-wrapper {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 10px;
+        flex-wrap: nowrap; /* Prevent wrapping for horizontal scroll */
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .filter-pill {
+        flex: 0 0 auto;
+        padding: 6px 15px;
+        font-size: 0.8rem;
+    }
+}
