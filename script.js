@@ -1,3 +1,8 @@
+const API_BASE = "https://api.peer-2-peer.co.za";
+
+fetch(`${API_BASE}/login`)
+.then(res => res.json())
+.then(data => console.log(data));
 /**
  * PEER-2-PEER PROJECT - MAIN HOME PAGE SCRIPT
  */
@@ -164,4 +169,5 @@ if (dropZone && fileInput) {
     fileInput.addEventListener('change', () => {
         if (fileInput.files.length > 0) handleUpload(fileInput.files[0]);
     });
+
 }
