@@ -7,7 +7,7 @@ const sqlite3 = require('sqlite3').verbose();
 
 const app = express();
 const PORT = 3000;
-
+app.listen(PORT);
 // === 1. DATABASE CONNECTION ===
 // This MUST come before any db.run or db.serialize calls
 const db = new sqlite3.Database('./database.sqlite', (err) => {
@@ -206,4 +206,5 @@ app.get('/api/active-session', (req, res) => {
 });
 
 // === 9. START SERVER ===
+
 app.listen(PORT, () => console.log(`🚀 Server running at http://localhost:${PORT}`));
